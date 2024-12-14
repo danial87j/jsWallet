@@ -1,4 +1,4 @@
-let totalIncome = prompt("Enter Your Weekly Income"),
+let totalIncome = Number(prompt("Enter Your Weekly Income")),
   weeklyBudget = document.querySelector("#total"),
   remainBudget = document.querySelector("#left"),
   btn = document.querySelector(".btn-primary"),
@@ -15,7 +15,7 @@ if (totalIncome !== "" && !isNaN(incomeNumber)) {
   remainBudget.textContent = totalIncome;
 } else {
   while (totalIncome == "" || isNaN(incomeNumber)) {
-    totalIncome = prompt("Make Sure That Your Income Is A Number");
+    totalIncome = Number(prompt("Make Sure That Your Income Is A Number"));
     incomeNumber = Number(totalIncome);
     if (totalIncome !== "" && !isNaN(incomeNumber)) {
       weeklyBudget.textContent = totalIncome;
@@ -23,13 +23,19 @@ if (totalIncome !== "" && !isNaN(incomeNumber)) {
     }
   }
 }
+
 btn.addEventListener("click", (e) => {
   e.preventDefault();
   span.textContent = expense.value;
   span2.textContent = amount.value;
-  li.appendChild(span);
-  li.appendChild(span2);
+  weeklyBudget = totalIncome;
+  newBudget = weeklyBudget -= Number(amount.value);
+  remainBudget.innerHTML = newBudget;
+  eshgh(expense);
   ul.appendChild(li);
   expense.value = "";
   amount.value = "";
 });
+function eshgh(expense) {
+  li.innerHTML += `<li>${expense.value}${Number(amount.value)}</li>`;
+}
